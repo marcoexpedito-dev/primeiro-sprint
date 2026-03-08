@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto PI</title>
+</head>
+
+<body>
+    <h1><i>Análise de Eficiência Fotovoltaica</i></h1>
+    <br>
+    <br>
+    Qual valor sua placa está recebendo?(Em Watts, de 0 a 550)
+    <br>
+    <br>
+    <input id="ipt_placa">
+    <br>
+    <br>
+    Quantas horas a placa fica ligada, recebendo energia?
+    <br>
+    <br>
+    <input id="ipt_energia">
+    <br>
+    <br>
+    <button onclick="comparar()">Comparar</button>
+    <br>
+    <br>
+
+    <b id="msg_tela"></b>
+</body>
+
+</html>
+<script>
+    function comparar() {
+
+        // kWh = (1,200 × 3) ÷ 1,000 
+        let vlrPlaca = Number(ipt_placa.value)
+        let horasLigada = Number(ipt_energia.value)
+
+        let kwh = (vlrPlaca * horasLigada) / 1000
+
+        let vlrTotal = (vlrPlaca / 550) * 100
+
+        let comparacao = (550 * horasLigada) / 1000
+
+        let kwhMes = kwh * 30
+
+        let compMes = comparacao * 30
+
+        let diferenca = compMes - kwhMes
+
+
+        msg_tela.innerHTML += `<br> <br>
+        O valor ideal gerado em 1 mês utilizando 100% é de ${compMes.toFixed(2)} 
+        <br><br> <br><br> 
+        A eficiencia da sua placa é de: ${kwhMes.toFixed(2)} em KwH, o que equivale a ${vlrTotal.toFixed(2)}%.
+        <br><br> <br><br> 
+        A diferença(potencial não aproveitado) no mês é de: ${diferenca} KwH.
+        <br><br>
+        `
+
+
+    }
+</script>
